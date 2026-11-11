@@ -15,3 +15,9 @@ variable "bucket_prefix" {
   type        = string
   default     = "cgep-lab-2-3-compliant"
 }
+
+variable "project_name" {
+  description = "Project name tag"
+  type        = string
+  default     = "cgep-lab"
+}

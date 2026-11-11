@@ -1,0 +1,5 @@
+---
+# Lab 2.3 uses SSE-KMS with aws:kms default key and demonstrates encryption/versioning/public-access-block
+exclude:
+  - aws-s3-encryption-customer-key
+  - aws-s3-enable-bucket-logging
