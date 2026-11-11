@@ -1,55 +1,45 @@
-# terraform/modules/compliant-gcs-bucket/variables.tf
-variable "gcp_project" {
-  type        = string
-  description = "GCP project ID where the bucket and KMS resources will live."
-}
-
+variable "gcp_project" { type = string }
 variable "location" {
-  type        = string
-  description = "GCS bucket location. Multi-regions like US, EU are valid for buckets."
-  default     = "us-central1"
+  type    = string
+  default = "us-central1"
 }
-
 variable "kms_location" {
-  type        = string
-  description = "KMS keyring location. Must be a single region (multi-  description = "KMS keyring  keyrings)."
-  default     = "us-central1"
+  type    = string
+  default = "us-central1"
 }
-
-variable "prvariable "prvariable "prvariable ring
-  description = "Short project identifier."
+variable "project_label" {
+  type = string
   validation {
-    condition     = can(regex("^    condition     = can(regex("^    condition     = c_message = "project_label must be 3-21 lowercase alphanumerics or hyphens, starting with a letter."
+    condition     = can(regex("^[a-z][a-z0-9-]{2,20}$", var.project_label))
+    error_message = "project_label must be 3-21 lowercase alphanumerics or hyphens."
   }
 }
-
 variable "environment" {
-  type        = string
-  description = "Deployment environment."
+  type = string
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "environment must be one of: dev, staging, prod."
   }
 }
-
 variable "retention_days" {
-  type        = number
-  description = "Object retention in days. Production must be >= 365."
-
-  vali  vali  vali  vali ion     = var.retention_days >= 1 && var.retention_days <= 3650
-    error_message = "retention_days must be between 1 and 365    error_message = "re
+  type = number
+  validation {
+    condition     = var.retention_days >= 1 && var.retention_days <= 3650
+    error_message = "retention_days must be between 1 and 3650."
+  }
+  validation {
     condition     = var.environment != "prod" || var.retention_days >= 365
-    error_message = "retention_days must be >= 365 when enviro    error_message = "retentiariable "bucket_name_suffix" {
-  type        = string
-  description = "Globally-unique suffix appended to the bucket name."
+    error_message = "retention_days must be >= 365 when environment == \"prod\"."
+  }
+}
+variable "bucket_name_suffix" {
+  type = string
   validation {
     condition     = can(regex("^[a-z0-9-]{3,30}$", var.bucket_name_suffix))
     error_message = "bucket_name_suffix must be 3-30 lowercase alphanumerics or hyphens."
   }
 }
-
 variable "labels" {
-  type        = map(string)
-  description = "Optional additional labels. Required compliance labels are merged on top."
-  default     = {}
+  type    = map(string)
+  default = {}
 }
