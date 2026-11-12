@@ -1,0 +1,13 @@
+{
+  "Findings": [
+    {
+      "SchemaVersion": "2018-10-08",
+      "Id": "arn:aws:securityhub:us-east-1::finding/config-recorder-check",
+      "GeneratorId": "aws-foundational-security-best-practices/v/1.0.0/Config.1",
+      "Title": "AWS Config should be enabled and use the service-linked role for resource recording",
+      "Severity": { "Label": "CRITICAL" },
+      "Compliance": { "Status": "FAILED", "RelatedRequirements": ["NIST.800-53.r5 CM-2", "NIST.800-53.r5 CM-6", "NIST.800-53.r5 CM-8"] },
+      "Note": { "Text": "CloudTrail cgep-lab-mgmt verified IsLogging=true; SecurityHub API returned SubscriptionRequiredException on Free Plan account." }
+    }
+  ]
+}
