@@ -1,0 +1,2 @@
+VALID: Model component-definitions/compliant-s3-v1/component-definition.json passed the Validator
+VALID: Model profiles/cge-p-minimum/profile.json passed the Validator
